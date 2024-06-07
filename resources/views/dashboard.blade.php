@@ -68,7 +68,7 @@
                                     </div>
                                     <div>
                                         <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
-                                            {{$idea->created_at}} </span>
+                                            {{ $idea->created_at }} </span>
                                     </div>
                                 </div>
                                 <div>
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                     @endforeach
-
+                    {{ $ideas->links() }}
                 </div>
             </div>
             <div class="col-3">

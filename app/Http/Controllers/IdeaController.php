@@ -28,6 +28,9 @@ class IdeaController extends Controller
         // return view('dashboard', [
         //     'ideas' => Idea::all(),
         // ]);
+        request()->validate([
+            'idea' => 'required | min:5 | max:300',
+        ]);
         $idea = Idea::create(              ////////////// 2.
             [
                 'idea' => $request->idea,

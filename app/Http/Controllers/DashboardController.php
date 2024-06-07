@@ -21,7 +21,7 @@ class DashboardController extends Controller
         // $idea->save();
         // // dump($idea::all());
         return view('dashboard', [
-            'ideas' => Idea::all(),
+            'ideas' => Idea::latest()->paginate(5),
         ]);
     }
 }
