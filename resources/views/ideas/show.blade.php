@@ -40,12 +40,8 @@
             </div>
             <div class="col-6">
                 @include('shared.success-message')
-                @include('shared.submit-idea')
                 <hr>
-                <div class="mt-3">
-                    @include('ideas.idea-cards')
-                    {{ $ideas->links() }}
-                </div>
+                @include('ideas.idea-card')
             </div>
             <div class="col-3">
                 <div class="card">

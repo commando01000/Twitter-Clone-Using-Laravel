@@ -18,3 +18,5 @@ Route::post('/idea', [IdeaController::class, 'insert'])->name('idea.insertIdea')
 Route::post('/idea', [IdeaController::class, 'insert'])->name('idea.insertIdea');
 
 Route::delete('/idea/{id}', [IdeaController::class, 'delete'])->name('idea.deleteIdea');
+
+Route::get('idea/{idea}', [IdeaController::class, 'show'])->name('idea.showIdea');
