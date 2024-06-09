@@ -47,13 +47,22 @@
                         <div class="card mt-2">
                             <div class="px-3 pt-4 pb-2">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <img style="width:50px" class="me-2 avatar-sm rounded-circle"
-                                            src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
-                                        <div>
-                                            <h5 class="card-title mb-0"><a href="#"> Mario
-                                                </a></h5>
-                                        </div>
+                                    <div class="d-flex w-100 align-items-center">
+                                            <img style="width:50px" class="me-2 avatar-sm rounded-circle"
+                                                src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario"
+                                                alt="Mario Avatar">
+                                                <span><h5 class="card-title mb-0"><a href="#"> Mario
+                                                </a></h5></span>
+                                    </div>
+                                    <div>
+                                        <form action="{{ route('idea.deleteIdea', $idea->id) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger btn-sm me-2">
+                                                Remove
+                                            </button>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
