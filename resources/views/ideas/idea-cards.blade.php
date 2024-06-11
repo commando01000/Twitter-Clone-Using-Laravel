@@ -16,6 +16,11 @@
                         <a href="{{ route('idea.showIdea', $idea->id) }}" class="btn btn-sm"><span
                                 class="fas fa-eye"></span></a>
                     </div>
+                    <!-- pen icon wrapped in a div -->
+                    <div>
+                        <a href="{{ route('idea.editIdea', $idea->id) }}" class="btn btn-sm mx-2"><span
+                                class="fas fa-pen"></span></a>
+                    </div>
                     <form action="{{ route('idea.deleteIdea', $idea->id) }}" method="POST">
                         @csrf
                         @method('delete')

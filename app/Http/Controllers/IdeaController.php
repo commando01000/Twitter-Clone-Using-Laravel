@@ -42,13 +42,28 @@ class IdeaController extends Controller
     public function show(Idea $idea)
     {
         return view('ideas.show', [
-            'idea'=>$idea,
+            'idea' => $idea,
         ]);
+    }
+    public function edit(Idea $idea)
+    {
+        $edit = true;
+        return view('ideas.show', compact('idea', 'edit'));
+    }
+    public function update(Idea $idea)
+    {
+        request()->validate([
+            'idea' => 'required | min:5 | max:300',
+        ]);
+        $idea->idea = request('idea');
+        // update the idea
+        $idea->save();
+        return redirect()->route('dashboard')->with('success', 'Idea updated successfully');
     }
     public function delete($id)
     {
         $idea = Idea::find($id);
         $idea->delete();
-        return redirect()->route('dashboard')->with('deleted', 'Idea deleted successfully');
+        return redirect()->route('dashboard')->with('success', 'Idea deleted successfully');
     }
 }

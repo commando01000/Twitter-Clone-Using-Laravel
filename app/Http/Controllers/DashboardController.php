@@ -20,8 +20,15 @@ class DashboardController extends Controller
         // );
         // $idea->save();
         // // dump($idea::all());
+        $ideas = Idea::latest();
+        if (request()->has('search')) {
+            $search = request('search');
+            $ideas = Idea::where([
+                ['idea', 'like', '%' . $search . '%'],
+            ]);
+        }
         return view('dashboard', [
-            'ideas' => Idea::latest()->paginate(5),
+            'ideas' => $ideas->paginate(5),
         ]);
     }
 }
