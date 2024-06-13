@@ -1,27 +1,26 @@
 @extends('layout.layout')
 
 @section('content')
-    <div class="container py-4">
-        <div class="row">
-            <div class="col-3">
-                <div class="card overflow-hidden">
-                    <div class="card-body pt-3">
-                        @include('shared.side-navbar')
-                    </div>
-                    <div class="card-footer text-center py-2">
-                        <a class="btn btn-link btn-sm" href="#">View Profile </a>
-                    </div>
+    <div class="row">
+        <div class="col-3">
+            <div class="card overflow-hidden">
+                <div class="card-body pt-3">
+                    @include('shared.side-navbar')
+                </div>
+                <div class="card-footer text-center py-2">
+                    <a class="btn btn-link btn-sm" href="#">View Profile </a>
                 </div>
             </div>
-            <div class="col-6">
-                @include('shared.success-message')
-                <hr>
-                @include('ideas.idea-card')
-            </div>
-            <div class="col-3">
-                @include('shared.search')
-                @include('shared/follow-suggestion')
-            </div>
+        </div>
+        <div class="col-6">
+            @include('shared.success-message')
+            <hr>
+            @include('ideas.idea-card')
+        </div>
+        <div class="col-3">
+            @include('shared.search')
+            <hr>
+            @include('shared.follow-suggestion')
         </div>
     </div>
 @endsection

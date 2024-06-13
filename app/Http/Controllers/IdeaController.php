@@ -32,9 +32,7 @@ class IdeaController extends Controller
             'idea' => 'required | min:5 | max:300',
         ]);
         $idea = Idea::create(              ////////////// 2.
-            [
-                'idea' => $request->idea,
-            ]
+            request()->all()
         );
         // return redirect('/'); /////////// 1
         return redirect()->route('dashboard')->with('success', 'Idea inserted successfully'); ////////////// 2

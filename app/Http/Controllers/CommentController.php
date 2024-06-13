@@ -14,9 +14,9 @@ class CommentController extends Controller
     {
         $comment = new Comment();
         request()->validate([
-            'idea' => 'required | min:5 | max:300',
+            'comment' => 'required | min:5 | max:300',
         ]);
-        $comment->comment = $idea->idea;
+        $comment->comment = request('comment');
         $comment->idea_id = $idea->id;
         $comment->save();
         return redirect()->route('idea.showIdea', $idea->id)->with('success', 'Comment added successfully');
