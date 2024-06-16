@@ -12,10 +12,15 @@ class Idea extends Model
     protected $guarded = [];
     protected $fillable = [
         'idea',
+        'user_id',
         'likes',
     ];
     public function comments()
     {
         return $this->hasMany(Comment::class, 'idea_id', 'id');
     }
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class, 'user_id', 'id');
+    // }
 }

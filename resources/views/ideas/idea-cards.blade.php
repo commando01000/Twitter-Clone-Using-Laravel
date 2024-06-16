@@ -17,17 +17,19 @@
                                 class="fas fa-eye"></span></a>
                     </div>
                     <!-- pen icon wrapped in a div -->
-                    <div>
-                        <a href="{{ route('idea.editIdea', $idea->id) }}" class="btn btn-sm mx-2"><span
-                                class="fas fa-pen"></span></a>
-                    </div>
-                    <form action="{{ route('idea.deleteIdea', $idea->id) }}" method="POST">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-danger btn-sm me-2">
-                            X
-                        </button>
-                    </form>
+                    @if (Auth::user()->id == $idea->user_id)
+                        <div>
+                            <a href="{{ route('idea.editIdea', $idea->id) }}" class="btn btn-sm mx-2"><span
+                                    class="fas fa-pen"></span></a>
+                        </div>
+                        <form action="{{ route('idea.deleteIdea', $idea->id) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger btn-sm me-2">
+                                X
+                            </button>
+                        </form>
+                    @endif
 
                 </div>
             </div>

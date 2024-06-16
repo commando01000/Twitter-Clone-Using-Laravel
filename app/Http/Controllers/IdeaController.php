@@ -31,6 +31,7 @@ class IdeaController extends Controller
         request()->validate([
             'idea' => 'required | min:5 | max:300',
         ]);
+        $request['user_id'] = auth()->user()->id;
         $idea = Idea::create(              ////////////// 2.
             request()->all()
         );
@@ -46,6 +47,9 @@ class IdeaController extends Controller
     public function edit(Idea $idea)
     {
         $edit = true;
+        if (auth()->user()->id != $idea->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
         return view('ideas.show', compact('idea', 'edit'));
     }
     public function update(Idea $idea)
@@ -54,13 +58,19 @@ class IdeaController extends Controller
             'idea' => 'required | min:5 | max:300',
         ]);
         $idea->idea = request('idea');
+        if (auth()->user()->id != $idea->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
         // update the idea
         $idea->save();
         return redirect()->route('dashboard')->with('success', 'Idea updated successfully');
     }
-    public function delete($id)
+    public function delete(Idea $idea)
     {
-        $idea = Idea::find($id);
+        $idea = Idea::find($idea->id);
+        if (auth()->user()->id != $idea->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
         $idea->delete();
         return redirect()->route('dashboard')->with('success', 'Idea deleted successfully');
     }

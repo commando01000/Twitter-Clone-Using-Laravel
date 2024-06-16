@@ -5,7 +5,7 @@
                 <img style="width:50px" class="me-2 avatar-sm rounded-circle"
                     src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
                 <span>
-                    <h5 class="card-title mb-0"><a href="#"> Mario
+                    <h5 class="card-title mb-0"><a href="#"> {{ Auth::user()->name }}
                         </a></h5>
                 </span>
             </div>
@@ -15,13 +15,15 @@
                     <a href="{{ route('idea.showIdea', $idea->id) }}" class="btn btn-sm"><span
                             class="fas fa-eye"></span></a>
                 </div>
-                <form action="{{ route('idea.deleteIdea', $idea->id) }}" method="POST">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger btn-sm me-2">
-                        X
-                    </button>
-                </form>
+                @if (Auth::user()->id == $idea->user_id)
+                    <form action="{{ route('idea.deleteIdea', $idea->id) }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger btn-sm me-2">
+                            X
+                        </button>
+                    </form>
+                @endif
             </div>
         </div>
     </div>
