@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -33,3 +34,6 @@ Route::post('/register', [AuthController::class, 'insert'])->name('registerInser
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// resources
+Route::resource('users', userController::class)->only(['update', 'show', 'edit'])->middleware('auth');
