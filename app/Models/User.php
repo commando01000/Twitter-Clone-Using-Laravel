@@ -47,7 +47,7 @@ class User extends Authenticatable
 
     public function idea()
     {
-        return $this->hasMany(Idea::class);
+        return $this->hasMany(Idea::class)->orderBy('created_at', 'desc');
     }
     public function comments()
     {

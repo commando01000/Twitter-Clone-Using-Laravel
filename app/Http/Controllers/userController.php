@@ -13,23 +13,25 @@ class userController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        $ideas = $user->idea()->paginate(5);
+        return view('users.show', compact('user', 'ideas'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
         $edit = true;
-        return view('users.show', compact('user', 'edit'));
+        $ideas = $user->idea()->paginate(5);
+        return view('users.show', compact('user', 'edit', 'ideas'));
     }
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $user->update($request->all());
+        return redirect()->route('users.show', $user);
     }
 }

@@ -20,6 +20,7 @@
                 @include('users.user-card')
                 <hr>
             </div>
+            @include('ideas.idea-cards')
         </div>
         <div class="col-3">
             @include('shared.search')
