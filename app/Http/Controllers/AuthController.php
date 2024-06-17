@@ -41,7 +41,7 @@ class AuthController extends Controller
         ]);
         if (auth()->attempt($validation)) {
             request()->session()->regenerate();
-            return redirect('/')->with('success', 'User logged in successfully');
+            return redirect('/dashboard')->with('success', 'User logged in successfully');
         }
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',

@@ -18,7 +18,7 @@
             <hr>
             <div class="mt-3">
                 @include('ideas.idea-cards')
-                {{ $ideas->links() }}
+                {{ $ideas->withQueryString()->links() }}
             </div>
         </div>
         <div class="col-3">

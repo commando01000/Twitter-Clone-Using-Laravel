@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/terms', function () {
     return view('terms');
 });
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
 Route::group(['prefix' => 'idea'], function () {
     // ideas routes
