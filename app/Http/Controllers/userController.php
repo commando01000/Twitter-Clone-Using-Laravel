@@ -31,7 +31,17 @@ class userController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        //validation
+        $this->validate($request, [
+            'name' => 'nullable|min:5|max:30',
+            'bio' => 'nullable|min:5|max:300',
+            'image' => 'nullable|string',
+        ]);
         $user->update($request->all());
         return redirect()->route('users.show', $user);
+    }
+    public function profile()
+    {
+        return $this->show(auth()->user());
     }
 }

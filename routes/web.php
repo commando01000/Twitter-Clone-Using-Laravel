@@ -37,3 +37,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // resources
 Route::resource('users', userController::class)->only(['update', 'show', 'edit'])->middleware('auth');
+
+//profile routes
+Route::get('/profile', [userController::class, 'profile'])->name('profile')->middleware('auth');

@@ -17,10 +17,10 @@
             <ul class="navbar-nav">
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/login">Login</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register">Register</a>
+                        <a class="nav-link" href="{{ route('register') }}">Register</a>
                     </li>
                 @endguest
 
@@ -31,7 +31,7 @@
                             {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/logout">Logout</a>
                             </li>
