@@ -36,9 +36,16 @@
                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm"> Edit </a>
                     </div>
                 @else
-                    <div class="text-end">
-                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm"> cancel </a>
-                    </div>
+                    @if (Auth::user()->id == $user->id && !(isset($edit) && $edit))
+                        <div class="text-end">
+                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm"> cancel </a>
+                        </div>
+                    @endif
+                    @if (Auth::user()->id == $user->id && (isset($edit) && $edit))
+                        <div class="text-end">
+                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm"> cancel </a>
+                        </div>
+                    @endif
                 @endif
             </div>
             @if ($edit ?? false)
@@ -75,16 +82,22 @@
                     <a href="#" class="fw-light nav-link fs-6"> <span class="fas fa-comment me-1">
                         </span> {{ $user->comments()->count() }} </a>
                 </div>
-                @if (Auth::user()->id != $user->id)
-                    <div class="mt-3">
-                        <button class="btn btn-primary btn-sm"> Follow </button>
-                    </div>
-                @else
-                    <div class="mt-3">
-                        <button class="btn btn-primary btn-sm"> Followers </button>
-                    </div>
-                @endif
             </div>
         </div>
     </form>
+    @if (Auth::user()->id != $user->id)
+        <div class="mt-3">
+            @if (!Auth::user()->isFollowing($user))
+                <form action="{{ route('users.follow', $user->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-primary ms-3 mb-3 btn-sm"> Follow </button>
+                </form>
+            @else
+                <form action="{{ route('users.unfollow', $user->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-primary ms-3 mb-3 btn-sm"> Unfollow </button>
+                </form>
+            @endif
+        </div>
+    @endif
 </div>

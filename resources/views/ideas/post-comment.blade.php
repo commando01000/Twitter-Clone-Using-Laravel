@@ -14,10 +14,10 @@
 @foreach ($idea->comments as $item)
     <div class="d-flex align-items-start">
         <img style="width:35px" class="me-2 avatar-sm rounded-circle"
-            src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Luigi" alt="Luigi Avatar">
+            @if (!empty($idea->user->image)) src="{{ asset('images/' . $idea->user->image) }}" alt="user's image" @endif>
         <div class="w-100">
             <div class="d-flex justify-content-between">
-                <h6 class="">{{$item->user->name}}
+                <h6 class="">{{ $item->user->name }}
                 </h6>
                 <small class="fs-6 fw-light text-muted"> {{ $item->created_at }}</small>
             </div>
