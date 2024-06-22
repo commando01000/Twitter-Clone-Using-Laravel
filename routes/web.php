@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/terms', function () {
     return view('terms');
-});
+})->name('terms');
+
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 

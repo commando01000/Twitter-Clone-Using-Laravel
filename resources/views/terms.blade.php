@@ -1,16 +1,18 @@
 @extends('layout.layout')
-
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <h1>Terms and Conditions</h1>
+            <div class="col-3">
+                <div class="card overflow-hidden">
+                    <div class="card-body pt-3">
+                        @include('shared.side-navbar')
+                    </div>
+                    <div class="card-footer text-center py-2">
+                        <a class="btn btn-link btn-sm" href="{{ route('profile') }}">View Profile </a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                     dolore
                     magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -21,6 +23,10 @@
                     anim
                     id est
                     laborum.</p>
+            </div>
+            <div class="col-3">
+                @include('shared.search')
+                @include('shared.follow-suggestion')
             </div>
         </div>
     </div>

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -26,11 +28,12 @@ class AuthController extends Controller
             'password_confirmation' => 'required|min:5|max:50',
         ]);
         // dd($validation);
-        User::create([
+        $user = User::create([
             'name' => $validation['name'],
             'email' => $validation['email'],
             'password' => Hash::make($validation['password']),
         ]);
+        //Mail::to($validation['email'])->send(new WelcomeEmail($user));
         return redirect('/')->with('success', 'User registered successfully');
     }
     public function authenticate(Request $request)
