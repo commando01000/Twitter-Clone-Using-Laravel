@@ -17,24 +17,33 @@
             <ul class="navbar-nav">
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('login') ? 'text-white' : '' }}" aria-current="page" href="{{ route('login') }}">Login</a>
+                        <a class="nav-link {{ Route::is('login') ? 'text-white' : '' }}" aria-current="page"
+                            href="{{ route('login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('register') ? 'text-white' : '' }}" href="{{ route('register') }}">Register</a>
+                        <a class="nav-link {{ Route::is('register') ? 'text-white' : '' }}"
+                            href="{{ route('register') }}">Register</a>
                     </li>
                 @endguest
 
                 @auth
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
+                            <li><a class="dropdown-item nav-link {{ Route::is('profile') ? 'text-white' : '' }}" href="{{ route('profile') }}">Profile</a></li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/logout">Logout</a>
                             </li>
+                            @if (Auth::user()->is_admin)
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Route::is('admin.dashboard') ? 'text-white' : '' }}"
+                                        href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
+                                </li>
+                            @endif
                             <!-- Add more dropdown items here if needed -->
                         </ul>
                     </li>

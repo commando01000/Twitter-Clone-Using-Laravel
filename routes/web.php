@@ -8,13 +8,15 @@ use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\IdeaLikesController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/terms', function () {
     return view('terms');
 })->name('terms');
 
-Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::get('/', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
 Route::group(['prefix' => 'idea'], function () {
@@ -27,6 +29,7 @@ Route::group(['prefix' => 'idea'], function () {
     // comments routes
     Route::post('/{idea}/comments', [CommentController::class, 'insert'])->name('idea.comment.insertComment')->middleware('auth');
 });
+
 //authentication routes
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'insert'])->name('registerInsert');
@@ -37,16 +40,19 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // resources
 Route::resource('users', userController::class)->only(['update', 'show', 'edit'])->middleware('auth');
 
-//profile routes
+// profile routes
 Route::get('/profile', [userController::class, 'profile'])->name('profile')->middleware('auth');
 
-//follow routes
+// follow routes
 Route::post('/users/{user}/follow', [FollowerController::class, 'follow'])->name('users.follow')->middleware('auth');
 Route::post('/users/{user}/unfollow', [FollowerController::class, 'unfollow'])->name('users.unfollow')->middleware('auth');
 
-//like routes
+// like routes
 Route::post('/ideas/{idea}/like', [IdeaLikesController::class, 'like'])->name('idea.like')->middleware('auth');
 Route::post('/users/{idea}/unlike', [IdeaLikesController::class, 'unlike'])->name('idea.unlike')->middleware('auth');
 
 // feed routes
 Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
+
+// admin routes
+Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth', 'admin');
