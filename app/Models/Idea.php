@@ -25,6 +25,7 @@ class Idea extends Model
     }
     public function likes()
     {
+        // eager loading
         return $this->belongsToMany(User::class, 'idea_likes', 'idea_id', 'user_id')->withTimestamps();
     }
 }

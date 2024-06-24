@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaController;
+use App\Http\Controllers\IdeaLikesController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,5 +39,10 @@ Route::resource('users', userController::class)->only(['update', 'show', 'edit']
 //profile routes
 Route::get('/profile', [userController::class, 'profile'])->name('profile')->middleware('auth');
 
+//follow routes
 Route::post('/users/{user}/follow', [FollowerController::class, 'follow'])->name('users.follow')->middleware('auth');
 Route::post('/users/{user}/unfollow', [FollowerController::class, 'unfollow'])->name('users.unfollow')->middleware('auth');
+
+//like routes
+Route::post('/ideas/{idea}/like', [IdeaLikesController::class, 'like'])->name('idea.like')->middleware('auth');
+Route::post('/users/{idea}/unlike', [IdeaLikesController::class, 'unlike'])->name('idea.unlike')->middleware('auth');
