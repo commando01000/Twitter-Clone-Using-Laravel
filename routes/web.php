@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\IdeaLikesController;
@@ -46,3 +47,6 @@ Route::post('/users/{user}/unfollow', [FollowerController::class, 'unfollow'])->
 //like routes
 Route::post('/ideas/{idea}/like', [IdeaLikesController::class, 'like'])->name('idea.like')->middleware('auth');
 Route::post('/users/{idea}/unlike', [IdeaLikesController::class, 'unlike'])->name('idea.unlike')->middleware('auth');
+
+// feed routes
+Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
