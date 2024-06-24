@@ -11,7 +11,7 @@
         <hr>
     </div>
 </form>
-@foreach ($idea->comments as $item)
+@forelse ($idea->comments as $item)
     <div class="d-flex align-items-start">
         <img style="width:35px" class="me-2 avatar-sm rounded-circle"
             @if (!empty($idea->user->image)) src="{{ asset('images/' . $idea->user->image) }}" alt="user's image" @endif>
@@ -26,4 +26,6 @@
             </p>
         </div>
     </div>
-@endforeach
+@empty
+    <p class="text-center"> No comments yet </p>
+@endforelse

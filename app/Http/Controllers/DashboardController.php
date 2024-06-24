@@ -20,7 +20,7 @@ class DashboardController extends Controller
         // );
         // $idea->save();
         // // dump($idea::all());
-        $ideas = Idea::latest();
+        $ideas = Idea::with('user:id,name,image','comments.user:id,name,image')->latest();
         if (request()->has('search')) {
             $search = request('search');
             $ideas = Idea::where([
