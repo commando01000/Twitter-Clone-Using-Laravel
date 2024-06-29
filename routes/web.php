@@ -55,4 +55,4 @@ Route::post('/users/{idea}/unlike', [IdeaLikesController::class, 'unlike'])->nam
 Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
 
 // admin routes
-Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth', 'admin');
+Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth','can:admin');

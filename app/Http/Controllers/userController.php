@@ -20,8 +20,14 @@ class userController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(Request $request, User $user)
     {
+        if ($user->id != auth()->user()->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $this->authorize('edit-profile', $user);
+
         $edit = true;
         $ideas = $user->idea()->paginate(5);
         return view('users.show', compact('user', 'edit', 'ideas'));
@@ -31,7 +37,14 @@ class userController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if ($user->id != auth()->user()->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $this->authorize('edit-profile', $user);
+
         //validation
+
         $this->validate($request, [
             'name' => 'nullable|min:5|max:30',
             'bio' => 'nullable|min:5|max:300',
