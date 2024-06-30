@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class IdeaController extends Controller
 {
@@ -47,9 +48,11 @@ class IdeaController extends Controller
     public function edit(Idea $idea)
     {
         $edit = true;
-        if (auth()->user()->id != $idea->user_id) {
-            abort(403, 'Unauthorized action.');
+
+        if (!Gate::allows('edit-idea', $idea)) {
+            abort(403);
         }
+
         return view('ideas.show', compact('idea', 'edit'));
     }
     public function update(Idea $idea)
@@ -57,6 +60,11 @@ class IdeaController extends Controller
         request()->validate([
             'idea' => 'required | min:5 | max:300',
         ]);
+
+        if (!Gate::allows('edit-idea', $idea)) {
+            abort(403);
+        }
+
         $idea->idea = request('idea');
         if (auth()->user()->id != $idea->user_id) {
             abort(403, 'Unauthorized action.');
