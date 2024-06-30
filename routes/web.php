@@ -31,11 +31,14 @@ Route::group(['prefix' => 'idea'], function () {
 });
 
 //authentication routes
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/register', [AuthController::class, 'insert'])->name('registerInsert');
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/login', [AuthController::class, 'authenticate']);
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'insert'])->name('registerInsert');
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'authenticate']);
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
 
 // resources
 Route::resource('users', userController::class)->only(['update', 'show', 'edit'])->middleware('auth');
@@ -55,4 +58,4 @@ Route::post('/users/{idea}/unlike', [IdeaLikesController::class, 'unlike'])->nam
 Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
 
 // admin routes
-Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth','can:admin');
+Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth', 'can:admin');

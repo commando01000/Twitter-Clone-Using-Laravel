@@ -49,9 +49,11 @@ class IdeaController extends Controller
     {
         $edit = true;
 
-        if (!Gate::allows('edit-idea', $idea)) {
-            abort(403);
-        }
+        // if (!Gate::allows('edit-idea', $idea)) {
+        //     abort(403);
+        // }
+
+        $this->authorize('update', $idea);
 
         return view('ideas.show', compact('idea', 'edit'));
     }
@@ -61,9 +63,10 @@ class IdeaController extends Controller
             'idea' => 'required | min:5 | max:300',
         ]);
 
-        if (!Gate::allows('edit-idea', $idea)) {
-            abort(403);
-        }
+        // if (!Gate::allows('edit-idea', $idea)) {
+        //     abort(403);
+        // }
+        $this->authorize('update', $idea);
 
         $idea->idea = request('idea');
         if (auth()->user()->id != $idea->user_id) {
@@ -75,10 +78,12 @@ class IdeaController extends Controller
     }
     public function delete(Idea $idea)
     {
+        // if (!Gate::allows('delete-idea', $idea)) {
+        //     abort(403);
+        // }
+        $this->authorize('delete', $idea);
+
         $idea = Idea::find($idea->id);
-        if (auth()->user()->id != $idea->user_id) {
-            abort(403, 'Unauthorized action.');
-        }
         $idea->delete();
         return redirect()->route('dashboard')->with('success', 'Idea deleted successfully');
     }

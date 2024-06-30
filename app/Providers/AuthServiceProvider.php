@@ -37,8 +37,12 @@ class AuthServiceProvider extends ServiceProvider
             return ((bool) $user->id == auth()->user()->id);
         });
 
-        Gate::define('edit-idea', function (User $user, Idea $idea) {
-            return ((bool) $idea->user_id == $user->id);
-        });
+        // Gate::define('edit-idea', function (User $user, Idea $idea) {
+        //     return ((bool) $idea->user_id == $user->id);
+        // });
+
+        // Gate::define('edit-delete', function (User $user, Idea $idea) {
+        //     return ((bool) $idea->user_id == $user->id);
+        // });
     }
 }
