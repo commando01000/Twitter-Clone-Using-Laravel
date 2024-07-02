@@ -1,5 +1,7 @@
 @extends('layout.layout')
 
+@section('title', 'Register')
+
 <body>
     @section('content')
         <div class="row justify-content-center">

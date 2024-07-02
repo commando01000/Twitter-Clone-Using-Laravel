@@ -36,8 +36,13 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/register', [AuthController::class, 'insert'])->name('registerInsert');
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'authenticate']);
+});
+
+
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+
 
 
 // resources

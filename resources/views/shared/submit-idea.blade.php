@@ -16,5 +16,5 @@
     </div>
 @endauth
 @guest
-    <p class="text-center"> Please <a href="/login">login</a> to share ideas </p>
+    <h4 class="text-center text-white"> Please <a href="/login">login</a> </h4>
 @endguest

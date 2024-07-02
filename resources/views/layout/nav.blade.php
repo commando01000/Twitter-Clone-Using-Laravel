@@ -34,16 +34,17 @@
                             {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item nav-link {{ Route::is('profile') ? 'text-white' : '' }}" href="{{ route('profile') }}">Profile</a></li>
+                            <li><a class="dropdown-item nav-link {{ Route::is('profile') ? 'text-white' : '' }}"
+                                    href="{{ route('profile') }}">Profile</a></li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/logout">Logout</a>
                             </li>
-                            @if (Auth::user()->is_admin)
+                            @can('admin', Auth::user())
                                 <li class="nav-item">
                                     <a class="nav-link {{ Route::is('admin.dashboard') ? 'text-white' : '' }}"
                                         href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
                                 </li>
-                            @endif
+                            @endcan
                             <!-- Add more dropdown items here if needed -->
                         </ul>
                     </li>
