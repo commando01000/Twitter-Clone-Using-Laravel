@@ -24,6 +24,15 @@
                         <a class="nav-link {{ Route::is('register') ? 'text-white' : '' }}"
                             href="{{ route('register') }}">Register</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('lang', ['locale' => 'en']) }}">
+                            <span>en</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('lang', ['locale' => 'ar']) }}">
+                            <span>ar</span>
+                        </a>
+                    </li>
                 @endguest
 
                 @auth

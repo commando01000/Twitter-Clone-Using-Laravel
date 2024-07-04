@@ -10,6 +10,7 @@ use App\Http\Controllers\IdeaLikesController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 
+use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/terms', function () {
@@ -64,3 +65,10 @@ Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
 
 // admin routes
 Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth', 'can:admin');
+
+// Lang routes
+Route::get('/lang/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+})->middleware(SetLocale::class)->name('lang');

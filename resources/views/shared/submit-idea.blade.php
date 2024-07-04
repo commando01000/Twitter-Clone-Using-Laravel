@@ -16,5 +16,8 @@
     </div>
 @endauth
 @guest
-    <h4 class="text-center text-white"> Please <a href="/login">login</a> </h4>
+    {{-- <h4 class="text-center text-white">@lang ('login.please', [], 'ar') @lang ('login.login', [], 'ar')
+        @lang ('login.share_ideas', [], 'ar') </h4> --}}
+    <h4 class="text-center text-white">@lang ('login.please') @lang ('login.login')
+        @lang ('login.share_ideas') </h4>
 @endguest

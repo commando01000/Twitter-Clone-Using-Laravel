@@ -1,5 +1,7 @@
 <?php
 
 return [
-    "Login To Your Account" => 'Login To Share Ideas',
+    'please' => 'Please',
+    'login' => 'login',
+    "share_ideas" => ' to share ideas',
 ];

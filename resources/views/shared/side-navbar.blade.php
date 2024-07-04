@@ -9,8 +9,7 @@
             <span>Explore</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{ Route::is('feed') ? 'text-white bg-primary rounded' : '' }}"
-            href="{{ route('feed') }}">
+        <a class="nav-link {{ Route::is('feed') ? 'text-white bg-primary rounded' : '' }}" href="{{ route('feed') }}">
             <span>Feed</span></a>
     </li>
     <li class="nav-item">
@@ -24,5 +23,12 @@
     <li class="nav-item">
         <a class="nav-link" href="#">
             <span>Settings</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('lang', ['locale' => 'en']) }}">
+            <span>en</span></a>
+        <a class="nav-link" href="{{ route('lang', ['locale' => 'ar']) }}">
+            <span>ar</span>
+        </a>
     </li>
 </ul>
