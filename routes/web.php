@@ -12,6 +12,7 @@ use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 
 use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -72,5 +73,7 @@ Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.da
 Route::get('/lang/{locale}', function ($locale) {
     App::setLocale($locale);
     Session::put('locale', $locale);
+    // dd(File::isReadable(lang_path('ar/statements.php')));
+    // return response()->json(['locale' => $locale]);
     return redirect()->back();
 })->name('lang');
