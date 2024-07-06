@@ -11,7 +11,9 @@ use App\Http\Controllers\userController;
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 
 use App\Http\Middleware\SetLocale;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 Route::get('/terms', function () {
     return view('terms');
@@ -68,7 +70,7 @@ Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.da
 
 // Lang routes
 Route::get('/lang/{locale}', function ($locale) {
-    app()->setLocale($locale);
-    session()->put('locale', $locale);
+    App::setLocale($locale);
+    Session::put('locale', $locale);
     return redirect()->back();
-})->middleware(SetLocale::class)->name('lang');
+})->name('lang');

@@ -1,5 +1,5 @@
 @auth
-    <h4> Share yours ideas </h4>
+    <h4> @lang ('statements.share_your_ideas') </h4>
     <div class="row">
         <form action="{{ route('idea.insertIdea') }}" method="post">
             @csrf
@@ -20,7 +20,7 @@
         @lang ('login.share_ideas', [], 'ar') </h4> --}}
     {{-- <h4 class="text-center text-white">@lang ('login.please') @lang ('login.login')
         @lang ('login.share_ideas') </h4> --}}
-        <h4>
-            {{trans('login.please')}}
-        </h4>
+    <h4>
+        {{ trans('statements.please') }}
+    </h4>
 @endguest

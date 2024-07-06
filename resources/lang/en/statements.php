@@ -2,7 +2,7 @@
 
 return [
     'please' => 'Please',
-    'login' => 'login',
-    "share_ideas" => ' to share ideas',
+    'login' => 'Login',
+    "share_ideas" => ' To share ideas',
     "share_your_ideas" => 'Share your ideas',
 ];
