@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
     //
 
-    public function index()
+    public function index(Request $request)
     {
         // $idea = new Idea(
         //     [
@@ -20,6 +22,9 @@ class DashboardController extends Controller
         // );
         // $idea->save();
         // // dump($idea::all());
+        $locale = Session::get('locale');
+        App::setLocale($locale);
+        Session::put('locale', $locale);
         $ideas = Idea::with('user:id,name,image', 'comments.user:id,name,image')->latest(); //eager loading of user and comments
         if (request()->has('search')) {
             $search = request('search');

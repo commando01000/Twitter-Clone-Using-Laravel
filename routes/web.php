@@ -10,6 +10,7 @@ use App\Http\Controllers\IdeaLikesController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 
+use App\Http\Middleware\Middleware\EnsureUserIsGuest;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
@@ -73,7 +74,9 @@ Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.da
 Route::get('/lang/{locale}', function ($locale) {
     App::setLocale($locale);
     Session::put('locale', $locale);
-    // dd(File::isReadable(lang_path('ar/statements.php')));
-    // return response()->json(['locale' => $locale]);
     return redirect()->back();
 })->name('lang');
+
+// Route::get('/lang/{locale}', function ($locale) {
+//     return redirect()->route('login', ['locale' => $locale]);
+// })->middleware(EnsureUserIsGuest::class)->name('lang');

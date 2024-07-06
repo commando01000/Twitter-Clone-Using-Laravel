@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Mail\WelcomeEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -17,6 +19,9 @@ class AuthController extends Controller
     }
     public function login()
     {
+        $locale = Session::get('locale');
+        App::setLocale($locale);
+        Session::put('locale', $locale);
         return view('Authentication.login');
     }
     public function insert(Request $request)
@@ -38,6 +43,7 @@ class AuthController extends Controller
     }
     public function authenticate(Request $request)
     {
+
         $validation = $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:5|max:50',

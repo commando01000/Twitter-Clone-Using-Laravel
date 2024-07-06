@@ -1,5 +1,6 @@
 @auth
-    <h4> @lang ('statements.share_your_ideas') </h4>
+    <h4> @lang('statements.share_your_ideas') </h4>
+
     <div class="row">
         <form action="{{ route('idea.insertIdea') }}" method="post">
             @csrf

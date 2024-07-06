@@ -1,0 +1,1 @@
+<h1> @lang('statements.share_your_ideas') </h1>
