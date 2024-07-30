@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
-class DashboardController extends Controller
+class AdminUserController extends Controller
 {
     public function index()
     {
@@ -15,6 +15,7 @@ class DashboardController extends Controller
         // } else {
         //     abort(403, 'Unauthorized action.');
         // }
-        return view('admin.dashboard');
+        $users = User::latest()->paginate(5);
+        return view('admin.users.index', compact('users'));
     }
 }

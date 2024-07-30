@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\AdminIdeasController;
+use App\Http\Controllers\admin\AdminUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
@@ -9,8 +11,7 @@ use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\IdeaLikesController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
-
-use App\Http\Middleware\Middleware\EnsureUserIsGuest;
+use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
@@ -68,7 +69,14 @@ Route::post('/users/{idea}/unlike', [IdeaLikesController::class, 'unlike'])->nam
 Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
 
 // admin routes
-Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth', 'can:admin');
+// create admin route group
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', EnsureUserIsAdmin::class]], function () {
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users');
+    Route::resource('/ideas', AdminIdeasController::class)->only(['index'])->names([
+        'index' => 'admin.ideas.index',
+    ]);
+});
 
 // Lang routes
 Route::get('/lang/{locale}', function ($locale) {
@@ -76,7 +84,3 @@ Route::get('/lang/{locale}', function ($locale) {
     Session::put('locale', $locale);
     return redirect()->back();
 })->name('lang');
-
-// Route::get('/lang/{locale}', function ($locale) {
-//     return redirect()->route('login', ['locale' => $locale]);
-// })->middleware(EnsureUserIsGuest::class)->name('lang');

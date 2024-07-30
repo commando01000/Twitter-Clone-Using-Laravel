@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Middleware\EnsureUserIsAdmin;
-use App\Http\Middleware\Middleware\EnsureUserIsGuest;
+use App\Http\Middleware\EnsureUserIsGuest;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // $middleware->alias([SetLocale::class, 'SetLocale']);
         $middleware->append(SetLocale::class);
         $middleware->append(EnsureUserIsGuest::class);
+        $middleware->append(EnsureUserIsAdmin::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

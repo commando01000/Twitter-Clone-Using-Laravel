@@ -27,7 +27,7 @@ class userController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $this->authorize('edit-profile', $user);
+        // $this->authorize('edit-profile', $user);
 
         $edit = true;
         $ideas = $user->idea()->paginate(5);
@@ -42,7 +42,7 @@ class userController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $this->authorize('edit-profile', $user);
+        // $this->authorize('edit-profile', $user);
 
         //validation
 
