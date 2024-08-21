@@ -29,7 +29,8 @@ class WelcomeEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Thanks For Joining ' . config('app.name', ''),
+            subject: 'Thanks For Joining ' . config('app.name', 'Twitter Clone'),
+            from: 'jfijcc124@gmail.com',
         );
     }
 

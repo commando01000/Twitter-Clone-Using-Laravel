@@ -38,7 +38,7 @@ class AuthController extends Controller
             'email' => $validation['email'],
             'password' => Hash::make($validation['password']),
         ]);
-        //Mail::to($validation['email'])->send(new WelcomeEmail($user));
+        Mail::to($user->email)->send(new WelcomeEmail($user));
         return redirect('/')->with('success', 'User registered successfully');
     }
     public function authenticate(Request $request)
